@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Taller sobre Grafos</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/styles/default.min.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/highlight.min.js"></script>
+  <script>hljs.highlightAll();</script>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 40px;
+      background-color: #f5f5f5;
+      color: #2c3e50;
+      line-height: 1.6;
+    }
+    h1, h2 {
+      color: #1e272e;
+    }
+    pre {
+      background: #eee;
+      padding: 10px;
+      border-left: 5px solid #2c3e50;
+      border-radius: 5px;
+      overflow-x: auto;
+    }
+    img {
+      max-width: 300px;
+      margin: 20px 0;
+    }
+    ul {
+      list-style-type: square;
+    }
+  </style>
+</head>
+<body>
+  <h1>Taller sobre Grafos</h1>
+
+  <h2>1. ¿Qué es un grafo?</h2>
+  <p>Un <strong>grafo</strong> es una estructura matemática que representa un conjunto de objetos llamados nodos (o vértices) y las conexiones entre ellos, llamadas aristas. Es útil para modelar relaciones entre elementos.</p>
+
+  <h2>2. ¿Para qué se utilizan?</h2>
+  <p>Los grafos se utilizan en una gran variedad de campos como informática, redes sociales, transporte, telecomunicaciones y más. Por ejemplo, para buscar la ruta más corta entre ciudades o analizar la conectividad en una red social.</p>
+
+  <h2>3. Partes y tipos de grafos</h2>
+  <ul>
+    <li><strong>Vértices (nodos):</strong> representan los elementos o entidades.</li>
+    <li><strong>Aristas (conexiones):</strong> representan las relaciones o caminos entre nodos.</li>
+  </ul>
+  <p>Tipos de grafos:</p>
+  <ul>
+    <li>Dirigido / No dirigido</li>
+    <li>Ponderado / No ponderado</li>
+    <li>Conexo / Disconexo</li>
+  </ul>
+
+  <p><strong>Ejemplo gráfico:</strong></p>
+  <img src="https://upload.wikimedia.org/wikipedia/commons/5/5b/Undirected.svg" alt="Ejemplo de grafo no dirigido">
+
+  <h2>4. Campo de aplicación</h2>
+  <p>Los grafos se aplican en problemas reales como:</p>
+  <ul>
+    <li>Redes de transporte (rutas óptimas)</li>
+    <li>Redes sociales (conexiones entre personas)</li>
+    <li>Redes de computadoras</li>
+    <li>Biología (análisis de genes y proteínas)</li>
+    <li>Algoritmos de búsqueda y recomendación</li>
+  </ul>
+
+  <h2>5. Ejemplos en Python</h2>
+
+  <h3>· BFS (Breadth-First Search) – Búsqueda por amplitud</h3>
+  <pre><code class="language-python">
+from collections import deque
+
+def bfs(grafo, inicio):
+    visitados = set()
+    cola = deque([inicio])
+
+    while cola:
+        nodo = cola.popleft()
+        if nodo not in visitados:
+            print(nodo)
+            visitados.add(nodo)
+            cola.extend([v for v in grafo[nodo] if v not in visitados])
+
+grafo = {
+    'A': ['B', 'C'],
+    'B': ['D', 'E'],
+    'C': ['F'],
+    'D': [],
+    'E': ['F'],
+    'F': []
+}
+
+bfs('A', grafo)
+  </code></pre>
+
+  <h3>· DFS (Depth-First Search) – Búsqueda por profundidad</h3>
+  <pre><code class="language-python">
+def dfs(grafo, nodo, visitados=None):
+    if visitados is None:
+        visitados = set()
+
+    if nodo not in visitados:
+        print(nodo)
+        visitados.add(nodo)
+        for vecino in grafo[nodo]:
+            dfs(grafo, vecino, visitados)
+
+grafo = {
+    'A': ['B', 'C'],
+    'B': ['D', 'E'],
+    'C': ['F'],
+    'D': [],
+    'E': ['F'],
+    'F': []
+}
+
+dfs(grafo, 'A')
+  </code></pre>
+
+  <p>Estos algoritmos permiten recorrer grafos de diferentes maneras y se utilizan para resolver problemas como encontrar caminos, detectar ciclos, entre otros.</p>
+</body>
+</html>
